@@ -7,8 +7,10 @@ import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -72,21 +74,6 @@ public class StevensPointFlowage extends Activity {
 			showPopup();
 			return true;
 		}
-		else if(id == R.id.contours){
-			item.setChecked(!item.isChecked());
-			layersChecked[0] = item.isChecked();
-			return true;
-		}
-		else if(id == R.id.pois){
-			item.setChecked(!item.isChecked());
-			layersChecked[1] = item.isChecked();
-			return true;
-		}
-		else if(id == R.id.structures){
-			item.setChecked(!item.isChecked());
-			layersChecked[2] = item.isChecked();
-			return true;
-		}
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -95,17 +82,34 @@ public class StevensPointFlowage extends Activity {
 		PopupMenu popup = new PopupMenu(this, menuItemView);
 		MenuInflater inflate = popup.getMenuInflater();
 		inflate.inflate(R.menu.popup, popup.getMenu());
+		popup.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item){
+				item.setChecked(!item.isChecked());
+				int id = item.getItemId();
+				if(id == R.id.contours){
+					layersChecked[0]=item.isChecked();
+				}
+				if(id == R.id.pois){
+					layersChecked[1]=item.isChecked();
+				}
+				if(id == R.id.structures){
+					layersChecked[2]=item.isChecked();
+				}
+				return false;
+			}
+		});
 		popup.show();
 		if(layersChecked[0]){
-			MenuItem item = (MenuItem) findViewById(R.id.contours) ;
+			MenuItem item = (MenuItem) findViewById(R.id.contours);
 			item.setChecked(true);
 		}
 		if(layersChecked[1]){
-			MenuItem item = (MenuItem) findViewById(R.id.pois) ;
+			MenuItem item = (MenuItem) findViewById(R.id.pois);
 			item.setChecked(true);
 		}
 		if(layersChecked[2]){
-			MenuItem item = (MenuItem) findViewById(R.id.structures) ;
+			MenuItem item = (MenuItem) findViewById(R.id.structures);
 			item.setChecked(true);
 		}
 	}
