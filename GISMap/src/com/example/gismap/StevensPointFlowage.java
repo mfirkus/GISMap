@@ -3,7 +3,7 @@ package com.example.gismap;
 import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.LocationDisplayManager.AutoPanMode;
 import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
 
 import android.app.Activity;
@@ -26,8 +26,8 @@ public class StevensPointFlowage extends Activity {
 		
 		mapView = (MapView)findViewById(R.id.map);
 		
-		mapView.addLayer(new ArcGISTiledMapServiceLayer(""+
-		"http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"));
+		//mapView.addLayer(new ArcGISDynamicMapServiceLayer(""+
+		//"http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"));
 		
 		mapView.setOnStatusChangedListener(
 				new OnStatusChangedListener(){
@@ -95,6 +95,7 @@ public class StevensPointFlowage extends Activity {
 		PopupMenu popup = new PopupMenu(this, menuItemView);
 		MenuInflater inflate = popup.getMenuInflater();
 		inflate.inflate(R.menu.popup, popup.getMenu());
+		popup.show();
 		if(layersChecked[0]){
 			MenuItem item = (MenuItem) findViewById(R.id.contours) ;
 			item.setChecked(true);
@@ -107,7 +108,6 @@ public class StevensPointFlowage extends Activity {
 			MenuItem item = (MenuItem) findViewById(R.id.structures) ;
 			item.setChecked(true);
 		}
-		popup.show();
 	}
 	
 }
