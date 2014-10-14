@@ -3,11 +3,9 @@ package com.example.gismap;
 import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.LocationDisplayManager.AutoPanMode;
 import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
@@ -99,19 +97,21 @@ public class StevensPointFlowage extends Activity {
 				return false;
 			}
 		});
-		popup.show();
+		Menu popupMenu = popup.getMenu();
 		if(layersChecked[0]){
-			MenuItem item = (MenuItem) findViewById(R.id.contours);
+			MenuItem item = (MenuItem) popupMenu.findItem(R.id.contours);
 			item.setChecked(true);
 		}
 		if(layersChecked[1]){
-			MenuItem item = (MenuItem) findViewById(R.id.pois);
+			MenuItem item = (MenuItem) popupMenu.findItem(R.id.pois);
 			item.setChecked(true);
 		}
 		if(layersChecked[2]){
-			MenuItem item = (MenuItem) findViewById(R.id.structures);
+			MenuItem item = (MenuItem) popupMenu.findItem(R.id.structures);
 			item.setChecked(true);
 		}
+		popup.show();
+		
 	}
 	
 }
